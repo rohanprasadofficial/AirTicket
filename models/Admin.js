@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-var PersonSchema = new Schema({
+var AdminSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -27,8 +27,8 @@ var PersonSchema = new Schema({
   roleID: {
     type: String,
     required: true,
-    default: 1
+    default: 2
   }
 });
 
-module.exports = Person = mongoose.model("myPerson", PersonSchema);
+module.exports = Admin = mongoose.model("myAdmin", AdminSchema);

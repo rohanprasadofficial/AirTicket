@@ -4,6 +4,14 @@ const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
 const passport = require("passport");
 
+/**
+ *ROLE ID : 
+  Admin - 2
+  User - 1 
+
+
+ */
+
 const app = express();
 const port = 3000 || process.env.PORT;
 
