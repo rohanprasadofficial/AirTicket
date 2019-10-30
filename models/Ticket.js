@@ -40,4 +40,4 @@ var TicketSchema = new Schema({
     default: Date.now
   }
 });
-module.exports = Admin = mongoose.model("myAdmin", AdminSchema);
+module.exports = Ticket = mongoose.model("myTickets", TicketSchema);
