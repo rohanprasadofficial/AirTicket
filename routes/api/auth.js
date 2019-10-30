@@ -54,7 +54,7 @@ router.post("/register/user", (req, res) => {
 });
 
 router.post("/register/admin", (req, res) => {
-  Person.findOne({ email: req.body.email })
+  Admin.findOne({ email: req.body.email })
     .then(person => {
       if (person) {
         res.status(400).json({ message: "User already registered" });
@@ -132,7 +132,7 @@ router.post("/login/user", (req, res, next) => {
 });
 
 router.post("/login/admin", (req, res, next) => {
-  Person.findOne({ email: req.body.email })
+  Admin.findOne({ email: req.body.email })
 
     .then(person => {
       if (person) {
@@ -180,11 +180,7 @@ router.get(
   "/profile",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.send({
-      name: req.user.name,
-      email: req.user.email,
-      profilepic: req.user.profilepic
-    });
+    res.json(req.user);
   }
 );
 

@@ -8,8 +8,6 @@ const passport = require("passport");
  *ROLE ID : 
   Admin - 2
   User - 1 
-
-
  */
 
 const app = express();
