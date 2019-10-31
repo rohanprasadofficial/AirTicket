@@ -36,6 +36,29 @@ router.post(
     }
   }
 );
+
+router.get(
+  "/getallflights",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    if (req.user.roleID == "2") {
+      Flight.find()
+        .then(flight => {
+          if (flight) {
+            res.json({ status: true, message: flight });
+          } else {
+            res.json({ status: false, message: "Flight not found" });
+          }
+        })
+        .catch(err => res.json({ status: false, message: err }));
+    } else {
+      res.json({ status: false, message: "Not an admin" });
+    }
+  }
+);
+
 router.delete(
   "/deleteflight",
   passport.authenticate("jwt", { session: false }),
