@@ -26,6 +26,8 @@ router.post(
       const flight = {};
       flight.name = req.body.name;
       flight.flightNumber = req.body.flightNumber;
+      flight.flightID = req.body.flightID;
+
       var flightSchema = new Flight(flight);
       flightSchema
         .save()
@@ -68,7 +70,8 @@ router.delete(
     if (req.user.roleID == "2") {
       Flight.findOne({
         name: req.body.name,
-        flightNumber: req.body.flightNumber
+        flightNumber: req.body.flightNumber,
+        flightID: req.body.flightID
       })
         .then(flight => {
           if (flight) {
@@ -97,10 +100,63 @@ router.post(
       route.finishDest = req.body.finishDest;
       route.startDestCode = req.body.startDestCode;
       route.finishDestCode = req.body.finishDestCode;
+      route.routeID = req.body.routeID;
+
       var routeSchema = new Route(route);
       routeSchema
         .save()
         .then(route => res.json({ status: true, payload: route }))
+        .catch(err => res.json({ status: false, message: err }));
+    } else {
+      res.json({ status: false, message: "Not an admin" });
+    }
+  }
+);
+
+router.get(
+  "/getallroutes",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    if (req.user.roleID == "2") {
+      Route.find()
+        .then(route => {
+          if (route) {
+            res.json({ status: true, message: route });
+          } else {
+            res.json({ status: false, message: "Route not found" });
+          }
+        })
+        .catch(err => res.json({ status: false, message: err }));
+    } else {
+      res.json({ status: false, message: "Not an admin" });
+    }
+  }
+);
+
+router.delete(
+  "/deleteroute",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    if (req.user.roleID == "2") {
+      Route.findOne({
+        startDest: req.body.startDest,
+        finishDest: req.body.finishDest,
+        startDestCode: req.body.startDestCode,
+        finishDestCode: req.body.finishDestCode,
+        routeID: req.body.routeID
+      })
+        .then(route => {
+          if (route) {
+            route.delete();
+            res.json({ status: true, message: route });
+          } else {
+            res.json({ status: false, message: "Route not found" });
+          }
+        })
         .catch(err => res.json({ status: false, message: err }));
     } else {
       res.json({ status: false, message: "Not an admin" });

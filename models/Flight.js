@@ -11,6 +11,11 @@ var FlightSchema = new Schema({
     type: String,
     required: true
   },
+  flightID: {
+    type: String,
+    required: true
+  },
+
   date: {
     type: Date,
     default: Date.now

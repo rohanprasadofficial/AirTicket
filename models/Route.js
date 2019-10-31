@@ -19,6 +19,10 @@ var RouteSchema = new Schema({
     type: String,
     required: true
   },
+  routeID: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
