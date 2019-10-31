@@ -26,8 +26,11 @@ app.use(bodyparser.json());
 // Importing all the routes/api
 const auth = require("./routes/api/auth");
 const booking = require("./routes/api/booking");
+const flight = require("./routes/api/flight");
+
 app.use("/auth", auth);
 app.use("/booking", booking);
+app.use("/flight", flight);
 
 var db = require("./setup/DBSetup").DBURL;
 const authData = {

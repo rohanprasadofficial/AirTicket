@@ -11,14 +11,12 @@ router.use(bodyparser.urlencoded({ extended: false }));
 router.use(bodyparser.json());
 
 const Person = require("./../../models/Person");
-const Admin = require("./../../models/Admin");
 
 router.get("/", (req, res) => {
   res.json({ sucess: true });
 });
 
 //REGISTER ROUTE
-
 router.post("/register/user", (req, res) => {
   Person.findOne({ email: req.body.email })
     .then(person => {
@@ -28,7 +26,8 @@ router.post("/register/user", (req, res) => {
         const newPerson = new Person({
           name: req.body.name,
           password: req.body.password,
-          email: req.body.email
+          email: req.body.email,
+          roleID: "1"
         });
 
         bcrypt.genSalt(10, function(err, salt) {
@@ -54,7 +53,7 @@ router.post("/register/user", (req, res) => {
 });
 
 router.post("/register/admin", (req, res) => {
-  Admin.findOne({ email: req.body.email })
+  Person.findOne({ email: req.body.email })
     .then(person => {
       if (person) {
         res.status(400).json({ message: "User already registered" });
@@ -62,7 +61,8 @@ router.post("/register/admin", (req, res) => {
         const newPerson = new Person({
           name: req.body.name,
           password: req.body.password,
-          email: req.body.email
+          email: req.body.email,
+          roleID: "2"
         });
 
         bcrypt.genSalt(10, function(err, salt) {
@@ -132,7 +132,7 @@ router.post("/login/user", (req, res, next) => {
 });
 
 router.post("/login/admin", (req, res, next) => {
-  Admin.findOne({ email: req.body.email })
+  Person.findOne({ email: req.body.email })
 
     .then(person => {
       if (person) {
@@ -175,7 +175,6 @@ router.post("/login/admin", (req, res, next) => {
 });
 
 // //PROFILE ROUTE
-
 router.get(
   "/profile",
   passport.authenticate("jwt", { session: false }),
