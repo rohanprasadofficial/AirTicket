@@ -13,7 +13,7 @@ router.use(bodyparser.json());
 const Ticket = require("./../../models/Ticket");
 
 router.get("/", (req, res) => {
-  res.json({ sucess: true, message: "Booking Module" });
+  res.json({ success: true, message: "Booking Module" });
 });
 
 router.post(
