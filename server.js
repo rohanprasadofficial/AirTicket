@@ -51,6 +51,9 @@ app.get("/", (req, res) => {
   res.send("<p>Airticket Server :)</p>");
 });
 
+app.use("", (req, res) => {
+  res.send("<p>404</p>");
+});
 //Starting Server
 app.listen(port, () => {
   console.log(`Server started on ${port}`);
