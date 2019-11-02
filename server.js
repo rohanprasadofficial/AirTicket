@@ -11,7 +11,7 @@ const passport = require("passport");
  */
 
 const app = express();
-const port = 8080 || process.env.PORT;
+const port = 3000 || process.env.PORT;
 
 //Passport Middleware
 app.use(passport.initialize());
