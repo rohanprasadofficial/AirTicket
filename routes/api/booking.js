@@ -26,6 +26,8 @@ router.post(
     ticket.From = req.body.From;
     ticket.To = req.body.To;
     ticket.DepartDate = req.body.DepartDate;
+    ticket.FlightNumber = req.body.FlightNumber;
+    ticket.FlicketName = req.body.FlicketName;
     ticket.returnDate = req.body.returnDate;
     ticket.passengerType = req.body.passengerType;
     ticket.travelType = req.body.travelType;
