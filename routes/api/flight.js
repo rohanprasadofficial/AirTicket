@@ -13,7 +13,7 @@ router.use(bodyparser.json());
 const Flight = require("./../../models/Flight");
 const Route = require("./../../models/Route");
 router.get("/", (req, res) => {
-  res.json({ sucess: true, message: "Flight Module" });
+  res.json({ success: true, message: "Flight Module" });
 });
 
 router.post(

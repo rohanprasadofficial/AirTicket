@@ -51,6 +51,10 @@ app.get("/", (req, res) => {
   res.send("<p>Airticket Server :)</p>");
 });
 
+app.get("/test", (req, res) => {
+  res.send("<p>This is test</p>");
+});
+
 app.use("", (req, res) => {
   res.send("<p>404</p>");
 });
