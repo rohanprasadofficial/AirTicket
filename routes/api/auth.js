@@ -120,7 +120,7 @@ router.post("/login/user", (req, res, next) => {
                   res.json({ success: true, token: "Bearer " + token });
                 });
               } else {
-                res.json({ success: false, message: "Password wrong" });
+                res.json({ success: false, token: "Password wrong" });
               }
             })
             .catch(err => {
@@ -147,9 +147,6 @@ router.post("/login/admin", (req, res, next) => {
               // res === true
 
               if (res1) {
-                //Create Payload
-                //  res.json({ sucess: true, message: "Login Sucessfully" });
-
                 const payload = {
                   name: person.name,
                   id: person.id,
@@ -163,7 +160,7 @@ router.post("/login/admin", (req, res, next) => {
                   res.json({ sucess: true, token: "Bearer " + token });
                 });
               } else {
-                res.json({ success: false, message: "Password wrong" });
+                res.json({ success: false, token: "Password wrong" });
               }
             })
             .catch(err => {
