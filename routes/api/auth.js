@@ -21,7 +21,9 @@ router.post("/register/user", (req, res) => {
   Person.findOne({ email: req.body.email })
     .then(person => {
       if (person) {
-        res.status(400).json({ message: "User already registered" });
+        res
+          .status(400)
+          .json({ success: false, message: "User already registered" });
       } else {
         const newPerson = new Person({
           name: req.body.name,
@@ -56,7 +58,9 @@ router.post("/register/admin", (req, res) => {
   Person.findOne({ email: req.body.email })
     .then(person => {
       if (person) {
-        res.status(400).json({ message: "User already registered" });
+        res
+          .status(400)
+          .json({ success: false, message: "User already registered" });
       } else {
         const newPerson = new Person({
           name: req.body.name,
@@ -103,7 +107,6 @@ router.post("/login/user", (req, res, next) => {
               if (res1) {
                 //Create Payload
                 //  res.json({ sucess: true, message: "Login Sucessfully" });
-
                 const payload = {
                   name: person.name,
                   id: person.id,
