@@ -114,10 +114,10 @@ router.post("/login/user", (req, res, next) => {
 
                 jwt.sign(payload, key, (err, token) => {
                   if (err) throw err;
-                  res.json({ sucess: true, token: "Bearer " + token });
+                  res.json({ success: true, token: "Bearer " + token });
                 });
               } else {
-                res.json({ message: "Password wrong" });
+                res.json({ success: false, message: "Password wrong" });
               }
             })
             .catch(err => {
@@ -160,7 +160,7 @@ router.post("/login/admin", (req, res, next) => {
                   res.json({ sucess: true, token: "Bearer " + token });
                 });
               } else {
-                res.json({ message: "Password wrong" });
+                res.json({ success: false, message: "Password wrong" });
               }
             })
             .catch(err => {
