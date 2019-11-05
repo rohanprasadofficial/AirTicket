@@ -40,7 +40,7 @@ router.post("/register/user", (req, res) => {
             newPerson
               .save()
               .then(person => {
-                res.json(person);
+                res.json({ success: true, message: person });
               })
               .catch(err => {
                 console.log(err);
@@ -77,7 +77,7 @@ router.post("/register/admin", (req, res) => {
             newPerson
               .save()
               .then(person => {
-                res.json(person);
+                res.json({ success: true, message: person });
               })
               .catch(err => {
                 console.log(err);
