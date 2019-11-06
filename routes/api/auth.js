@@ -104,7 +104,7 @@ router.post("/login/user", (req, res, next) => {
             .then(res1 => {
               // res === true
 
-              if (res1) {
+              if (res1 && person.roleID == "1") {
                 //Create Payload
                 //  res.json({ sucess: true, message: "Login Sucessfully" });
                 const payload = {
@@ -146,7 +146,7 @@ router.post("/login/admin", (req, res, next) => {
             .then(res1 => {
               // res === true
 
-              if (res1) {
+              if (res1 && person.roleID == "2") {
                 const payload = {
                   name: person.name,
                   id: person.id,
