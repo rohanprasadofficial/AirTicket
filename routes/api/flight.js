@@ -12,6 +12,8 @@ router.use(bodyparser.json());
 
 const Flight = require("./../../models/Flight");
 const Route = require("./../../models/Route");
+
+const Airport = require("./../../models/Airport");
 router.get("/", (req, res) => {
   res.json({ success: true, message: "Flight Module" });
 });
@@ -155,6 +157,87 @@ router.delete(
             res.json({ status: true, message: route });
           } else {
             res.json({ status: false, message: "Route not found" });
+          }
+        })
+        .catch(err => res.json({ status: false, message: err }));
+    } else {
+      res.json({ status: false, message: "Not an admin" });
+    }
+  }
+);
+
+router.post(
+  "/addairport",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    if (req.user.roleID == "2") {
+      const airport = {};
+      airport.name = req.body.name;
+
+      var flightSchema = new Airport(airport);
+      Airport.findOne({ name: req.body.name })
+        .then(airport => {
+          if (airport) {
+            res.json({ status: false, message: "Aiport already exist" });
+          } else {
+            flightSchema
+              .save()
+              .then(airport =>
+                res.json({
+                  status: true,
+                  message: "Successfully added airport"
+                })
+              )
+              .catch(err => res.json({ status: false, message: err }));
+          }
+        })
+        .catch(err => res.json({ status: false, message: err }));
+    } else {
+      res.json({ status: false, message: "Not an admin" });
+    }
+  }
+);
+
+router.get(
+  "/getallairports",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    if (req.user.roleID == "2") {
+      Airport.find()
+        .then(flight => {
+          if (flight) {
+            res.json({ status: true, message: flight });
+          } else {
+            res.json({ status: false, message: "Flight not found" });
+          }
+        })
+        .catch(err => res.json({ status: false, message: err }));
+    } else {
+      res.json({ status: false, message: "Not an admin" });
+    }
+  }
+);
+
+router.delete(
+  "/deleteairport",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    if (req.user.roleID == "2") {
+      Airport.findOne({
+        name: req.body.name
+      })
+        .then(flight => {
+          if (flight) {
+            flight.delete();
+            res.json({ status: true, message: "Successfully deleted airport" });
+          } else {
+            res.json({ status: false, message: "Airport not found" });
           }
         })
         .catch(err => res.json({ status: false, message: err }));
