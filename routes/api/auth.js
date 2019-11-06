@@ -157,7 +157,7 @@ router.post("/login/admin", (req, res, next) => {
 
                 jwt.sign(payload, key, (err, token) => {
                   if (err) throw err;
-                  res.json({ sucess: true, token: "Bearer " + token });
+                  res.json({ success: true, token: "Bearer " + token });
                 });
               } else {
                 res.json({ success: false, token: "Password wrong" });
