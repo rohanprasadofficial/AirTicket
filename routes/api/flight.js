@@ -25,16 +25,32 @@ router.post(
     // // res.json(req.user);
     console.log(req.user.roleID);
     if (req.user.roleID == "2") {
-      const flight = {};
-      flight.name = req.body.name;
-      flight.flightNumber = req.body.flightNumber;
-      flight.flightID = req.body.flightID;
-
-      var flightSchema = new Flight(flight);
-      flightSchema
-        .save()
-        .then(flight => res.json({ status: true, payload: flight }))
-        .catch(err => res.json({ status: false, message: err }));
+      Flight.findOne({
+        name: req.body.name,
+        flightNumber: req.body.flightNumber,
+        flightID: req.body.flightID
+      })
+        .then(flight => {
+          if (flight) {
+            res.json({ success: false, message: "Flight Already Exist!" });
+          } else {
+            const flight = {};
+            flight.name = req.body.name;
+            flight.flightNumber = req.body.flightNumber;
+            flight.flightID = req.body.flightID;
+            var flightSchema = new Flight(flight);
+            flightSchema
+              .save()
+              .then(flight =>
+                res.json({
+                  success: true,
+                  message: "Successfully added flight !"
+                })
+              )
+              .catch(err => res.json({ success: false, message: err }));
+          }
+        })
+        .catch(err => res.json({ success: false, message: err }));
     } else {
       res.json({ status: false, message: "Not an admin" });
     }
@@ -94,18 +110,31 @@ router.post(
     // // res.json(req.user);
     console.log(req.user.roleID);
     if (req.user.roleID == "2") {
-      const route = {};
-      route.startDest = req.body.startDest;
-      route.finishDest = req.body.finishDest;
-      route.startDestCode = req.body.startDestCode;
-      route.finishDestCode = req.body.finishDestCode;
-      route.routeID = req.body.routeID;
+      Flight.findOne(route)
+        .then(route => {
+          if (route) {
+            res.json({ success: false, message: "Route Already exists " });
+          } else {
+            const route = {};
+            route.startDest = req.body.startDest;
+            route.finishDest = req.body.finishDest;
+            route.startDestCode = req.body.startDestCode;
+            route.finishDestCode = req.body.finishDestCode;
+            route.routeID = req.body.routeID;
 
-      var routeSchema = new Route(route);
-      routeSchema
-        .save()
-        .then(route => res.json({ status: true, payload: route }))
-        .catch(err => res.json({ status: false, message: err }));
+            var routeSchema = new Route(route);
+            routeSchema
+              .save()
+              .then(route => res.json({ success: true, payload: route }))
+              .catch(err => res.json({ success: false, message: err }));
+          }
+        })
+        .catch(err =>
+          res.json({
+            success: false,
+            message: err
+          })
+        );
     } else {
       res.json({ status: false, message: "Not an admin" });
     }
@@ -177,22 +206,22 @@ router.post(
       Airport.findOne({ name: req.body.name })
         .then(airport => {
           if (airport) {
-            res.json({ status: false, message: "Aiport already exist" });
+            res.json({ success: false, message: "Aiport already exist" });
           } else {
             flightSchema
               .save()
               .then(airport =>
                 res.json({
-                  status: true,
+                  success: true,
                   message: "Successfully added airport"
                 })
               )
-              .catch(err => res.json({ status: false, message: err }));
+              .catch(err => res.json({ success: false, message: err }));
           }
         })
-        .catch(err => res.json({ status: false, message: err }));
+        .catch(err => res.json({ success: false, message: err }));
     } else {
-      res.json({ status: false, message: "Not an admin" });
+      res.json({ success: false, message: "Not an admin" });
     }
   }
 );
@@ -207,12 +236,12 @@ router.get(
     Airport.find()
       .then(flight => {
         if (flight) {
-          res.json({ status: true, message: flight });
+          res.json({ success: true, message: flight });
         } else {
-          res.json({ status: false, message: "Flight not found" });
+          res.json({ success: false, message: "Flight not found" });
         }
       })
-      .catch(err => res.json({ status: false, message: err }));
+      .catch(err => res.json({ success: false, message: err }));
   }
 );
 
@@ -229,14 +258,17 @@ router.delete(
         .then(flight => {
           if (flight) {
             flight.delete();
-            res.json({ status: true, message: "Successfully deleted airport" });
+            res.json({
+              success: true,
+              message: "Successfully deleted airport"
+            });
           } else {
-            res.json({ status: false, message: "Airport not found" });
+            res.json({ success: false, message: "Airport not found" });
           }
         })
-        .catch(err => res.json({ status: false, message: err }));
+        .catch(err => res.json({ success: false, message: err }));
     } else {
-      res.json({ status: false, message: "Not an admin" });
+      res.json({ success: false, message: "Not an admin" });
     }
   }
 );
