@@ -52,7 +52,7 @@ router.post(
         })
         .catch(err => res.json({ success: false, message: err }));
     } else {
-      res.json({ status: false, message: "Not an admin" });
+      res.json({ success: false, message: "Not an admin" });
     }
   }
 );
