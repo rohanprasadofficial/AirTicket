@@ -67,12 +67,12 @@ router.get(
     Flight.find()
       .then(flight => {
         if (flight) {
-          res.json({ status: true, message: flight });
+          res.json({ success: true, message: flight });
         } else {
-          res.json({ status: false, message: "Flight not found" });
+          res.json({ success: false, message: "Flight not found" });
         }
       })
-      .catch(err => res.json({ status: false, message: err }));
+      .catch(err => res.json({ success: false, message: err }));
   }
 );
 
@@ -91,14 +91,14 @@ router.delete(
         .then(flight => {
           if (flight) {
             flight.delete();
-            res.json({ status: true, message: "Successfully deleted flight" });
+            res.json({ success: true, message: "Successfully deleted flight" });
           } else {
-            res.json({ status: false, message: "Flight not found" });
+            res.json({ success: false, message: "Flight not found" });
           }
         })
-        .catch(err => res.json({ status: false, message: err }));
+        .catch(err => res.json({ success: false, message: err }));
     } else {
-      res.json({ status: false, message: "Not an admin" });
+      res.json({ success: false, message: "Not an admin" });
     }
   }
 );
@@ -230,7 +230,6 @@ router.post(
     }
   }
 );
-
 router.get(
   "/getallairports",
   passport.authenticate("jwt", { session: false }),
