@@ -91,7 +91,7 @@ router.delete(
         .then(flight => {
           if (flight) {
             flight.delete();
-            res.json({ status: true, message: flight });
+            res.json({ status: true, message: "Successfully deleted flight" });
           } else {
             res.json({ status: false, message: "Flight not found" });
           }
@@ -125,7 +125,12 @@ router.post(
             var routeSchema = new Route(route);
             routeSchema
               .save()
-              .then(route => res.json({ success: true, payload: route }))
+              .then(route =>
+                res.json({
+                  success: true,
+                  payload: "Successfully added route !"
+                })
+              )
               .catch(err => res.json({ success: false, message: err }));
           }
         })
@@ -180,7 +185,7 @@ router.delete(
         .then(route => {
           if (route) {
             route.delete();
-            res.json({ status: true, message: route });
+            res.json({ status: true, message: "Successfully delete route !" });
           } else {
             res.json({ status: false, message: "Route not found" });
           }
