@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
 var TicketSchema = new Schema({
@@ -15,11 +14,16 @@ var TicketSchema = new Schema({
     type: String,
     required: true
   },
-  returnDate: {
+  DestDate: {
     type: String,
     required: true
   },
-  passengerType: {
+  sourceTime: {
+    type: String,
+    required: true
+  },
+
+  destTime: {
     type: String,
     required: true
   },
@@ -32,6 +36,10 @@ var TicketSchema = new Schema({
     required: true
   },
   passengerName: {
+    type: String,
+    required: true
+  },
+  flightId: {
     type: String,
     required: true
   },
