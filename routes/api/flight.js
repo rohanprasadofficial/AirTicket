@@ -86,6 +86,23 @@ router.get(
   }
 );
 
+router.get(
+  "/getallspecflights",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // // res.json(req.user);
+    console.log(req.user.roleID);
+    Flight.find({ Source: req.body.source, Destination: req.body.destination })
+      .then(flight => {
+        if (flight) {
+          res.json({ success: true, message: flight });
+        } else {
+          res.json({ success: false, message: "Flight not found" });
+        }
+      })
+      .catch(err => res.json({ success: false, message: err }));
+  }
+);
 router.delete(
   "/deleteflight",
   passport.authenticate("jwt", { session: false }),
