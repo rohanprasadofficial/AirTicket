@@ -86,7 +86,7 @@ router.get(
   }
 );
 
-router.get(
+router.post(
   "/getallspecflights",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
