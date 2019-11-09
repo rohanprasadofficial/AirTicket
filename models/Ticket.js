@@ -43,6 +43,16 @@ var TicketSchema = new Schema({
     type: String,
     required: true
   },
+
+  FlicketName: {
+    type: String,
+    required: true
+  },
+
+  FlightNumber: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now

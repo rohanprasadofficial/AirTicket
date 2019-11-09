@@ -15,7 +15,6 @@ const Ticket = require("./../../models/Ticket");
 router.get("/", (req, res) => {
   res.json({ success: true, message: "Booking Module" });
 });
-
 router.post(
   "/bookticket",
   passport.authenticate("jwt", { session: false }),
@@ -26,13 +25,16 @@ router.post(
     ticket.From = req.body.From;
     ticket.To = req.body.To;
     ticket.DepartDate = req.body.DepartDate;
-    ticket.FlightNumber = req.body.FlightNumber;
-    ticket.FlicketName = req.body.FlicketName;
-    ticket.returnDate = req.body.returnDate;
-    ticket.passengerType = req.body.passengerType;
+    ticket.DestDate = req.body.DestDate;
+    ticket.sourceTime = req.body.sourceTime;
+    ticket.destTime = req.body.destTime;
     ticket.travelType = req.body.travelType;
     ticket.passengerEmail = req.user.email;
     ticket.passengerName = req.user.name;
+    ticket.flightId = req.body.flightId;
+    ticket.FlightNumber = req.body.FlightNumber;
+    ticket.FlicketName = req.body.FlicketName;
+
     console.log(ticket.From);
     const TicketSchema = new Ticket(ticket);
     TicketSchema.save()
