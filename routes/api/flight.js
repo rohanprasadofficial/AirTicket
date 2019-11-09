@@ -38,6 +38,16 @@ router.post(
             flight.name = req.body.name;
             flight.flightNumber = req.body.flightNumber;
             flight.flightID = req.body.flightID;
+            flight.Source = req.body.Source;
+            flight.Destination = req.body.Destination;
+            flight.sourceTime = req.body.sourceTime;
+            flight.destTime = req.body.destTime;
+            flight.sourceDate = req.body.sourceDate;
+            flight.DestDate = req.body.DestDate;
+            flight.FclassPrice = req.body.FclassPrice;
+            flight.BclassPrice = req.body.BclassPrice;
+            flight.PclassPrice = req.body.PclassPrice;
+            flight.EclassPrice = req.body.EclassPrice;
             var flightSchema = new Flight(flight);
             flightSchema
               .save()

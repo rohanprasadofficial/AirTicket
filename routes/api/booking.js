@@ -15,6 +15,7 @@ const Ticket = require("./../../models/Ticket");
 router.get("/", (req, res) => {
   res.json({ success: true, message: "Booking Module" });
 });
+
 router.post(
   "/bookticket",
   passport.authenticate("jwt", { session: false }),
