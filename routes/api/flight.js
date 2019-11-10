@@ -85,7 +85,6 @@ router.get(
       .catch(err => res.json({ success: false, message: err }));
   }
 );
-
 router.post(
   "/getallspecflights",
   passport.authenticate("jwt", { session: false }),

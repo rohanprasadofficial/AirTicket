@@ -31,6 +31,7 @@ var TicketSchema = new Schema({
     type: String,
     required: true
   },
+
   passengerEmail: {
     type: String,
     required: true
@@ -43,7 +44,6 @@ var TicketSchema = new Schema({
     type: String,
     required: true
   },
-
   FlicketName: {
     type: String,
     required: true

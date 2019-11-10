@@ -46,4 +46,16 @@ router.post(
   }
 );
 
+router.get(
+  "/viewbookings",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Ticket.find({ passengerEmail: req.user.email })
+      .then(booking => {
+        res.json({ success: true, message: booking });
+      })
+      .catch(err => res.json({ success: false, message: err }));
+  }
+);
+
 module.exports = router;
