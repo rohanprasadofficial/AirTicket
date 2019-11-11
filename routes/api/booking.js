@@ -58,4 +58,20 @@ router.get(
   }
 );
 
+router.get(
+  "/viewallbookings",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (req.user.roleID == "2") {
+      Ticket.find()
+        .then(booking => {
+          res.json({ success: true, message: booking });
+        })
+        .catch(err => res.json({ success: false, message: err }));
+    } else {
+      res.json({ success: false, message: "Not an admin" });
+    }
+  }
+);
+
 module.exports = router;
