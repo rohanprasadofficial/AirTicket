@@ -74,4 +74,21 @@ router.get(
   }
 );
 
+router.post(
+  "/deletebooking",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Ticket.findById({ _id: req.body.id })
+      .then(booking => {
+        if (booking) {
+          booking.delete();
+          res.json({ success: true, message: "Booking Successfully deleted" });
+        } else {
+          res.json({ success: false, message: "Booking not found" });
+        }
+      })
+      .catch(err => res.json({ success: false, message: err }));
+  }
+);
+
 module.exports = router;
