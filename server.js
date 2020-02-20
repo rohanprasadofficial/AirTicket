@@ -34,8 +34,8 @@ app.use("/flight", flight);
 
 var db = require("./setup/DBSetup").DBURL;
 const authData = {
-  user: "airticketdev",
-  pass: "Airticket@24",
+  user: "XXX",
+  pass: "XXX",
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
