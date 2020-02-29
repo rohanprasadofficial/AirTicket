@@ -69,6 +69,7 @@ router.post(
   }
 );
 
+
 router.get(
   "/getallflights",
   passport.authenticate("jwt", { session: false }),
