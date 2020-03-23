@@ -18,6 +18,7 @@ router.get("/", (req, res) => {
 
 //REGISTER ROUTE
 router.post("/register/user", (req, res) => {
+  console.log("REGISTER CALLED");
   Person.findOne({ email: req.body.email })
     .then(person => {
       if (person) {
