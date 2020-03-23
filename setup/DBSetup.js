@@ -1,6 +1,6 @@
 module.exports = {
-  DBURL: "mongodb://ds135574.mlab.com:35574/nodejslearning",
+  DBURL: process.env.DBURL,
   secret: "SecretToken",
-  username:"rohan",
-  password:"rohan123"
+  username:process.env.username,
+  password:process.env.password
 };
