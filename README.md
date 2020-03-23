@@ -3,6 +3,10 @@
 ### How to run
 - Clone the repository
 - Start mongodb server
-- Edit mongoURL and secret in `config/creds.js` accordingly
+- Add a .env file
+- `EXPORT username="XXX"
+   EXPORT password="XXX"
+   EXPORT DBURL="XXX"
+`
 - Run `npm i`
 - Run `npm start`
