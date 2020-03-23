@@ -11,7 +11,7 @@ const passport = require("passport");
  */
 
 const app = express();
-const port = 3000 || process.env.PORT;
+const port = 3500 || process.env.PORT;
 
 //Passport Middleware
 app.use(passport.initialize());
@@ -33,9 +33,12 @@ app.use("/booking", booking);
 app.use("/flight", flight);
 
 var db = require("./setup/DBSetup").DBURL;
+var usernameDB=require('./setup/DBSetup').username;
+var passwordDB=require('./setup/DBSetup').password;
+
 const authData = {
-  user: "XXX",
-  pass: "XXX",
+  user: usernameDB,
+  pass: passwordDB,
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
